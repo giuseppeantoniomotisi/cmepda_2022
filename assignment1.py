@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import sys
 import string
 import numpy as np
 import matplotlib.pyplot as plt
@@ -28,11 +29,13 @@ def search_letters(strg, alphabet, number_letters):
         counter+=1
     return letters_counter
 
-strg=input('Inserisci la stringa: ')
+with open(sys.argv[1], 'r') as f:
+    txt=f.read()
+
 alphabet=list(string.ascii_uppercase)
 number_letters=len(alphabet)
 counter=0
-counter_letters=search_letters(strg, alphabet, number_letters)
+counter_letters=search_letters(txt, alphabet, number_letters)
 while counter<number_letters:
     print(alphabet[counter],counter_letters[counter])
     counter+=1
