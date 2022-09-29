@@ -14,10 +14,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import sys
 import string
+import sys
+import timeit
 import numpy as np
 import matplotlib.pyplot as plt
+
+start = timeit.timeit()
 
 def search_letters(strg, alphabet, number_letters):
     alphabet=list(string.ascii_uppercase)
@@ -29,7 +32,7 @@ def search_letters(strg, alphabet, number_letters):
         counter+=1
     return letters_counter
 
-with open(sys.argv[1], 'r') as f:
+with open(sys.argv[1], 'r') as f: #argparse
     txt=f.read()
 
 alphabet=list(string.ascii_uppercase)
@@ -47,3 +50,7 @@ ax.set_ylabel('Counter Letters')
 ax.set_title('Statistics of a Book')
 
 plt.show()
+
+end = timeit.timeit()
+
+print('Elapsed time:',end-start)
