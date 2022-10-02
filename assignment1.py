@@ -53,7 +53,7 @@ def process(file_path, BOOLEAN):
     i+=1
 
   if BOOLEAN == 'Y':
-    histo(string.ascii_uppercase, s)
+    histo(list(string.ascii_uppercase), s)
        
 
 if __name__ == '__main__':
