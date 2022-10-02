@@ -15,41 +15,54 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import string
-import sys
+import argparse
 import timeit
 import numpy as np
 import matplotlib.pyplot as plt
 
 start = timeit.timeit()
 
-def search_letters(strg, alphabet, number_letters):
-    alphabet = list(string.ascii_uppercase)
-    counter = 0
-    letters_counter = np.array([], dtype=int)
-    while counter<number_letters:
-        letters_counter = np.insert(letters_counter,counter,int(strg.count(alphabet[counter])))
-        counter += 1
-    return letters_counter
+def search_letters(strg, alphabet):
+ alphabet = list(string.ascii_uppercase)
+ number_letters = len(list(string.ascii_uppercase))
+ counter = 0
+ letters_counter = np.array([], dtype=int)
+ while counter<number_letters:
+  letters_counter = np.insert(letters_counter,counter,int(strg.count(alphabet[counter])))
+  counter += 1
+ return letters_counter
 
-with open(sys.argv[1], 'r') as f: 
-    txt = f.read().upper()
+def histo(alphabet, counter_letters):
+ fig, ax = plt.subplots()
+ ax.bar(alphabet, counter_letters)
+ ax.set_ylabel('Counter Letters')
+ ax.set_title('Statistics of a Book')
+ plt.show()
 
-alphabet=list(string.ascii_uppercase)
-number_letters=len(alphabet)
-counter = 0
-counter_letters = search_letters(txt, alphabet, number_letters)
-while counter<number_letters:
-    print(alphabet[counter],counter_letters[counter])
-    counter += 1
+def process(file_path, BOOLEAN):
+ """
+ """
+ print(f'Opening input file {file_path}...')
+ 
+ with open(file_path, 'r') as input_file:
+  text = input_file.read().upper()
+  s = search_letters(text,string.ascii_uppercase)
+  i=0
+  while i<len(string.ascii_uppercase):
+    print(string.ascii_uppercase[i],s[i])
+    i+=1
 
-fig, ax = plt.subplots()
+  if BOOLEAN == 'Y':
+    histo(string.ascii_uppercase, s)
+       
 
-ax.bar(alphabet, counter_letters)
-ax.set_ylabel('Counter Letters')
-ax.set_title('Statistics of a Book')
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='This module print a Statistics of a Book. You have to use the command $python3 assigment1.py inputfilepath/inputfilename.txt$ to use the programm.')
+    parser.add_argument('infile', type=str, help='Path to the Input File')
+    parser.add_argument('histogram', choices=['Y', 'N'],type=str, default='N', help="Show Histogram of the Frequences", action="store")
+    args = parser.parse_args()
+    print(vars(args))
+    t = args.histogram
+    process(args.infile, args.histogram)
 
-plt.show()
-
-end = timeit.timeit()
-
-print('Elapsed time:',end-start)
+print('Elapsed time:',timeit.timeit()-start)
