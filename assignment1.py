@@ -23,25 +23,24 @@ import matplotlib.pyplot as plt
 start = timeit.timeit()
 
 def search_letters(strg, alphabet, number_letters):
-    alphabet=list(string.ascii_uppercase)
-    ustrg=strg.upper()
-    counter=0
-    letters_counter=np.array([])
+    alphabet = list(string.ascii_uppercase)
+    counter = 0
+    letters_counter = np.array([], dtype=int)
     while counter<number_letters:
-        letters_counter=np.insert(letters_counter,counter,int(ustrg.count(alphabet[counter])))
-        counter+=1
+        letters_counter = np.insert(letters_counter,counter,int(strg.count(alphabet[counter])))
+        counter += 1
     return letters_counter
 
-with open(sys.argv[1], 'r') as f: #argparse
-    txt=f.read()
+with open(sys.argv[1], 'r') as f: 
+    txt = f.read().upper()
 
 alphabet=list(string.ascii_uppercase)
 number_letters=len(alphabet)
-counter=0
-counter_letters=search_letters(txt, alphabet, number_letters)
+counter = 0
+counter_letters = search_letters(txt, alphabet, number_letters)
 while counter<number_letters:
     print(alphabet[counter],counter_letters[counter])
-    counter+=1
+    counter += 1
 
 fig, ax = plt.subplots()
 
