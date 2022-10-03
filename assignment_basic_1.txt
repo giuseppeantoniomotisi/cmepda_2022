@@ -15,11 +15,11 @@ of the alphabet (without distinguishing between lower and upper case) in the
 book.
 
 --- Specifications
-- the program should have a --help option summarizing the usage
-- the program should accept the path to the input file from the command line
-- the program should print out the total elapsed time
-- the program should have an option to display a histogram of the frequences
+- the program should have a --help option summarizing the usage OK
+- the program should accept the path to the input file from the command line OK
+- the program should print out the total elapsed time OK
+- the program should have an option to display a histogram of the frequences OK
 - [optional] the program should have an option to skip the parts of the text
-  that do not pertain to the book (e.g., preamble and license)
+  that do not pertain to the book (e.g., preamble and license) WP...
 - [optional] the program should have an option to print out the basic book
-  stats (e.g., number of characters, number of words, number of lines, etc.)
+  stats (e.g., number of characters, number of words, number of lines, etc.) WP...
