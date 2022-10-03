@@ -39,30 +39,21 @@ def histo(alphabet, counter_letters):
  ax.set_title('Statistics of a Book')
  plt.show()
 
-def process(file_path, BOOLEAN):
+def process(file_path, bool_histo):
  """
  """
  print(f'Opening input file {file_path}...')
  
  with open(file_path, 'r') as input_file:
   text = input_file.read().upper()
-  s = search_letters(text,string.ascii_uppercase)
-  i=0
-  while i<len(string.ascii_uppercase):
-    print(string.ascii_uppercase[i],s[i])
-    i+=1
-
-  if BOOLEAN == 'Y':
-    histo(list(string.ascii_uppercase), s)
-       
+  if bool_histo == 'Y':
+    histo(list(string.ascii_uppercase), search_letters(text,string.ascii_uppercase))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='This module print a Statistics of a Book. You have to use the command $python3 assigment1.py inputfilepath/inputfilename.txt$ to use the programm.')
     parser.add_argument('infile', type=str, help='Path to the Input File')
-    parser.add_argument('histogram', choices=['Y', 'N'],type=str, default='N', help="Show Histogram of the Frequences", action="store")
+    parser.add_argument('-histo', choices=['Y', 'N'],type=str, default='N', help="Show Histogram of the Frequences", action="store")
     args = parser.parse_args()
-    print(vars(args))
-    t = args.histogram
-    process(args.infile, args.histogram)
+    process(args.infile, args.histo)
 
 print('Elapsed time:',timeit.timeit()-start)
